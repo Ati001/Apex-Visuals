@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 
+/* Additional styles */
 @import './additional-styles/utility-patterns.css' layer(components);
 @import './additional-styles/theme.css';
 
@@ -26,10 +27,10 @@
   --animate-shine: shine 5s ease-in-out 500ms infinite;
   --animate-gradient: gradient 6s linear infinite;
   
-  /* Defining them here makes the editor happy */
-  --animate-fade-in: fade-in 1.2s ease-out forwards;
-  --animate-fade-in-delayed: fade-in 1.2s ease-out 400ms forwards;
-  --animate-fade-in-delayed-more: fade-in 1.2s ease-out 800ms forwards;
+  /* FIXED: Smooth Opacity Animations mapped for Tailwind v4 */
+  --animate-fade-in: fade-in 1.2s cubic-bezier(0.21, 0.6, 0.35, 1) forwards;
+  --animate-fade-in-delayed: fade-in 1.2s cubic-bezier(0.21, 0.6, 0.35, 1) 400ms forwards;
+  --animate-fade-in-delayed-more: fade-in 1.2s cubic-bezier(0.21, 0.6, 0.35, 1) 800ms forwards;
 
   @keyframes shine {
     0% { top: 0; transform: scaleY(5); opacity: 0; }
@@ -41,8 +42,8 @@
     to { background-position: 200% center; }
   }
   @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
 
