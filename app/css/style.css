@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-/* Additional styles */
+/* 1. Imports must come first */
 @import './additional-styles/utility-patterns.css' layer(components);
 @import './additional-styles/theme.css';
 
@@ -8,6 +8,7 @@
   strategy: base;
 }
 
+/* 2. Everything inside @theme must be valid CSS variables or @keyframes */
 @theme {
   --font-inter: var(--font-inter), sans-serif;
   --font-nacelle: var(--font-nacelle), sans-serif;
@@ -44,50 +45,31 @@
   --text-7xl--line-height: 1;
   --text-7xl--letter-spacing: -0.0268em;
 
+  /* Custom Animations */
   --animate-shine: shine 5s ease-in-out 500ms infinite;
   --animate-gradient: gradient 6s linear infinite;
-  
-  /* NEW: Smooth Opacity Animations */
-  --animate-fade-in: fadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  --animate-fade-in-delayed: fadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) 400ms forwards;
-  --animate-fade-in-delayed-more: fadeIn 1.2s cubic-bezier(0.4, 0, 0.2, 1) 800ms forwards;
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+  --animate-fade-in: fade-in 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  --animate-fade-in-delayed: fade-in 1.2s cubic-bezier(0.4, 0, 0.2, 1) 400ms forwards;
+  --animate-fade-in-delayed-more: fade-in 1.2s cubic-bezier(0.4, 0, 0.2, 1) 800ms forwards;
 
   @keyframes shine {
-    0% {
-      top: 0;
-      transform: scaleY(5);
-      opacity: 0;
-    }
-    10% {
-      opacity: 0.8;
-    }
-    20% {
-      top: 100%;
-      transform: scaleY(10);
-      opacity: 0;
-    }
-    100% {
-      top: 100%;
-      transform: scaleY(1);
-      opacity: 0;
-    }
+    0% { top: 0; transform: scaleY(5); opacity: 0; }
+    10% { opacity: 0.8; }
+    20% { top: 100%; transform: scaleY(10); opacity: 0; }
+    100% { top: 100%; transform: scaleY(1); opacity: 0; }
   }
-  @keyframes gradient {
-    to {
-      background-position: 200% center;
-    }
-  }
-}
 
+  @keyframes gradient {
+    to { background-position: 200% center; }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+} /* Final @theme bracket */
+
+/* 3. Base styles must be outside the theme block */
 @layer base {
   *,
   ::after,
