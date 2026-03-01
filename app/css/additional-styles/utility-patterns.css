@@ -1,15 +1,24 @@
 /* Buttons */
 .btn,
 .btn-sm {
-    @apply inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium transition-all;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 0.5rem; /* rounded-lg */
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500; /* font-medium */
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
 }
 
 .btn {
-    @apply px-4 py-[11px];
+    padding: 11px 1rem;
 }
 
 .btn-sm {
-    @apply px-3 py-[7px];
+    padding: 7px 0.75rem;
 }
 
 /* Forms */
@@ -26,30 +35,38 @@ input[type='search']::-webkit-search-results-decoration {
 .form-select,
 .form-checkbox,
 .form-radio {
-    @apply border border-gray-700 bg-gray-900/50 focus:border-gray-600 focus:ring-0 focus:ring-offset-0;
+    border-width: 1px;
+    border-color: #374151; /* gray-700 */
+    background-color: rgba(17, 24, 39, 0.5); /* gray-900/50 */
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border-color: #4b5563; /* gray-600 */
+    outline: 2px solid transparent;
+    outline-offset: 2px;
 }
 
 .form-input,
 .form-textarea,
 .form-multiselect,
 .form-select {
-    @apply rounded-lg px-4 py-2.5 text-sm text-gray-200;
+    border-radius: 0.5rem;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    color: #e5e7eb; /* gray-200 */
 }
 
-.form-input,
-.form-textarea {
-    @apply placeholder-gray-600;
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: #4b5563; /* gray-600 */
 }
 
 .form-select {
-    @apply pr-10;
+    padding-right: 2.5rem;
 }
 
 .form-checkbox,
 .form-radio {
-    @apply text-indigo-500;
-}
-
-.form-checkbox {
-    @apply rounded-xs;
+    color: #6366f1; /* indigo-500 */
 }
