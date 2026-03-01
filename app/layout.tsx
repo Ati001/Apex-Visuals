@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
+import { Viewport } from 'next';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,16 +27,28 @@ export const metadata = {
   description: "Video Editing & Motion Graphics Team",
 };
 
+// THIS IS THE KEY FOR REAL MOBILE DEVICES
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${nacelle.variable} bg-gray-950 font-inter text-base text-gray-200 antialiased`}>
-        <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
+        <div className="flex min-h-screen flex-col">
           <Header />
-          {/* pt-20 ensures content starts below the fixed header on mobile, pt-28 for desktop */}
-          <main className="flex-grow pt-20 md:pt-28">
+          
+          {/* On real mobile devices, we need a high pt (padding-top) 
+            to push content below the fixed/absolute header.
+          */}
+          <main className="flex-grow pt-[100px] md:pt-[120px]">
             {children}
           </main>
+          
           <Footer />
         </div>
         
