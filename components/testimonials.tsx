@@ -16,7 +16,7 @@ const showcaseItems = [
   { id: 6, category: "long-form", title: "Event Recap", type: "horizontal" },
   { id: 12, category: "long-form", title: "Brand Documentary", type: "horizontal" },
   
-  // Short-form Section - 6 items (2 rows)
+  // Short-form Section - 6 items
   { id: 7, category: "short-form", title: "Product Reel", type: "vertical" },
   { id: 8, category: "short-form", title: "Fitness TikTok", type: "vertical" },
   { id: 9, category: "short-form", title: "Fashion Short", type: "vertical" },
@@ -55,7 +55,7 @@ export default function Testimonials() {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
                   activeTab === tab ? "bg-slate-900 text-indigo-400 shadow-lg" : "text-slate-500 hover:text-slate-300"
                 }`}
               >
@@ -65,26 +65,26 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Video Grid */}
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 justify-items-center mb-20">
+        {/* Video Grid - Optimized for Mobile, Tablet, and Desktop */}
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-center mb-20">
           {showcaseItems
             .filter((item) => item.category === activeTab)
             .map((item) => (
               <div
                 key={item.id}
-                className={`group relative overflow-hidden rounded-2xl bg-slate-900 border border-white/10 hover:border-indigo-500/50 transition-all duration-500
-                ${item.type === "vertical" ? "aspect-[9/16] w-full max-w-[280px]" : "aspect-video w-full"}`}
+                className={`group relative overflow-hidden rounded-2xl bg-slate-900 border border-white/10 hover:border-indigo-500/50 transition-all duration-500 w-full
+                ${item.type === "vertical" ? "aspect-[9/16] max-w-[320px] sm:max-w-full" : "aspect-video"}`}
               >
-                {/* Video Placeholder/Background */}
+                {/* Video UI Overlay */}
                 <div className="absolute inset-0 bg-slate-800/20 flex items-center justify-center">
                   <div className="w-12 h-12 rounded-full bg-indigo-600/10 flex items-center justify-center border border-indigo-500/20 group-hover:scale-110 transition-transform">
                     <svg className="w-6 h-6 text-indigo-400 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                   </div>
                 </div>
 
-                {/* LABEL OVERLAY - Bottom Inside */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950/90 to-transparent p-4">
-                  <p className="text-xs font-bold text-slate-200 uppercase tracking-wider opacity-80 group-hover:opacity-100 transition-opacity">
+                {/* Label Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950/95 to-transparent p-4">
+                  <p className="text-[10px] sm:text-xs font-bold text-slate-200 uppercase tracking-wider opacity-90 group-hover:opacity-100 transition-opacity">
                     {item.title}
                   </p>
                 </div>
@@ -92,12 +92,12 @@ export default function Testimonials() {
             ))}
         </div>
 
-        {/* Client Testimonials */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Client Testimonials Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
             <div key={i} className="relative group p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-300 shadow-xl">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-0 group-hover:opacity-20 transition duration-500"></div>
-              <p className="text-slate-300 italic mb-4">"{t.content}"</p>
+              <p className="text-slate-300 italic mb-4 text-sm sm:text-base">"{t.content}"</p>
               <div className="flex items-center gap-3">
                 <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-indigo-500 to-slate-700 flex items-center justify-center text-[10px] font-bold text-white">
                   {t.name.charAt(0)}
