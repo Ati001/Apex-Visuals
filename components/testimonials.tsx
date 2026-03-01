@@ -30,9 +30,10 @@ export default function Testimonials() {
   const [activeTab, setActiveTab] = useState("showreel");
 
   return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 pb-20">
       <div className="border-t border-slate-800 py-12 md:py-20">
         
+        {/* Header */}
         <div className="mx-auto max-w-3xl pb-12 text-center">
           <h2 className="bg-gradient-to-r from-slate-200 via-indigo-200 to-slate-200 bg-clip-text pb-4 text-3xl font-bold text-transparent md:text-4xl">
             Our Visual Showcase
@@ -42,6 +43,7 @@ export default function Testimonials() {
           </p>
         </div>
 
+        {/* Filters */}
         <div className="flex justify-center pb-12">
           <div className="inline-flex flex-wrap justify-center rounded-2xl bg-slate-800/40 p-1 border border-white/10 backdrop-blur-sm">
             {["showreel", "long-form", "short-form"].map((tab) => (
@@ -58,6 +60,7 @@ export default function Testimonials() {
           </div>
         </div>
 
+        {/* Video Grid */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-center mb-20">
           {showcaseItems
             .filter((item) => item.category === activeTab)
@@ -69,19 +72,17 @@ export default function Testimonials() {
                   </video>
                 ) : (
                   <div className="absolute inset-0 bg-slate-800/20 flex items-center justify-center">
-                    <div className="w-12 h-12 rounded-full bg-indigo-600/10 flex items-center justify-center border border-indigo-500/20 group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-full bg-indigo-600/10 flex items-center justify-center border border-indigo-500/20">
                       <svg className="w-6 h-6 text-indigo-400 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                     </div>
                   </div>
                 )}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950/95 to-transparent p-4 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
-                  <p className="text-[10px] sm:text-xs font-bold text-slate-200 uppercase tracking-wider">{item.title}</p>
-                </div>
               </div>
             ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        {/* Testimonials */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
           {testimonials.map((t, i) => (
             <div key={i} className="relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 shadow-xl">
               <p className="text-slate-300 italic mb-4 text-sm sm:text-base">"{t.content}"</p>
@@ -98,16 +99,18 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* This is the missing WhatsApp Section */}
-        <div className="mt-12 text-center">
-          <a
-            className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-6 py-3 text-sm font-bold text-white transition-all hover:bg-indigo-500 shadow-lg shadow-indigo-500/20"
-            href="https://wa.me/923331043321"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Book a Call <span className="ml-2">→</span>
-          </a>
+        {/* WhatsApp Button Section */}
+        <div className="text-center pt-8">
+          <div className="inline-flex items-center">
+            <a
+              className="btn-sm group bg-gradient-to-t from-indigo-600 to-indigo-500 text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-400 px-8 py-3 rounded-full font-bold"
+              href="https://wa.me/923331043321"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Book a Call <span className="ml-1 tracking-normal text-indigo-200 transition-transform group-hover:translate-x-0.5">-&gt;</span>
+            </a>
+          </div>
         </div>
 
       </div>
