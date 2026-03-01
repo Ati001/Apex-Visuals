@@ -9,7 +9,7 @@ const showcaseItems = [
     category: "showreel", 
     title: "Main Showreel 2024", 
     type: "horizontal", 
-    videoSrc: "/videos/Intro-video.mp4" // EXACT MATCH: Capital 'I'
+    videoSrc: "/videos/Intro-video.mp4" 
   },
   { id: 10, category: "showreel", title: "Motion Graphics Reel", type: "horizontal" },
   { id: 11, category: "showreel", title: "Cinematic Reel", type: "horizontal" },
@@ -56,13 +56,13 @@ export default function Testimonials() {
 
         {/* Filter Buttons */}
         <div className="flex justify-center pb-12">
-          <div className="inline-flex flex-wrap justify-center rounded-2xl bg-slate-800/40 p-1 border border-white/10">
+          <div className="inline-flex flex-wrap justify-center rounded-2xl bg-slate-800/40 p-1 border border-white/10 backdrop-blur-sm">
             {["showreel", "long-form", "short-form"].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
-                  activeTab === tab ? "bg-slate-900 text-indigo-400" : "text-slate-500 hover:text-slate-300"
+                className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
+                  activeTab === tab ? "bg-slate-900 text-indigo-400 shadow-lg" : "text-slate-500 hover:text-slate-300"
                 }`}
               >
                 <span className="capitalize">{tab.replace("-", " ")}</span>
@@ -79,10 +79,12 @@ export default function Testimonials() {
               <div
                 key={item.id}
                 className={`group relative overflow-hidden rounded-2xl bg-slate-900 border border-white/10 hover:border-indigo-500/50 transition-all duration-500 w-full
-                ${item.type === "vertical" ? "aspect-[9/16] max-w-[320px]" : "aspect-video"}`}
+                ${item.type === "vertical" ? "aspect-[9/16] max-w-[320px] sm:max-w-full" : "aspect-video"}`}
               >
+                {/* VIDEO DISPLAY WITH PLAYER CONTROLS */}
                 {item.videoSrc ? (
                   <video
+                    controls
                     autoPlay
                     loop
                     muted
@@ -90,6 +92,7 @@ export default function Testimonials() {
                     className="h-full w-full object-cover"
                   >
                     <source src={item.videoSrc} type="video/mp4" />
+                    Your browser does not support the video tag.
                   </video>
                 ) : (
                   <div className="absolute inset-0 bg-slate-800/20 flex items-center justify-center">
@@ -99,7 +102,8 @@ export default function Testimonials() {
                   </div>
                 )}
 
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950/95 to-transparent p-4">
+                {/* Label Overlay - pointer-events-none ensures it doesn't block video controls */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950/95 to-transparent p-4 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
                   <p className="text-[10px] sm:text-xs font-bold text-slate-200 uppercase tracking-wider">
                     {item.title}
                   </p>
@@ -111,7 +115,7 @@ export default function Testimonials() {
         {/* Testimonials */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
-            <div key={i} className="relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all shadow-xl">
+            <div key={i} className="relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 shadow-xl">
               <p className="text-slate-300 italic mb-4 text-sm sm:text-base">"{t.content}"</p>
               <div className="flex items-center gap-3">
                 <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-indigo-500 to-slate-700 flex items-center justify-center text-[10px] font-bold text-white">
