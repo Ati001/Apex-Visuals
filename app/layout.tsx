@@ -35,6 +35,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${nacelle.variable} bg-gray-950 font-inter text-base text-gray-200 antialiased`}>
         {children}
+        {/* Global Security Script */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          document.addEventListener('contextmenu', e => e.preventDefault());
+          document.onkeydown = e => {
+            if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) return false;
+          };
+        `}} />
       </body>
     </html>
   );

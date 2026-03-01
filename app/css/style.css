@@ -51,3 +51,22 @@
     border-color: var(--color-gray-200, currentColor);
   }
 }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-fade-in-delayed {
+  animation: fadeIn 1s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-delayed-more {
+  animation: fadeIn 1s ease-out 0.8s forwards;
+  opacity: 0;
+}
