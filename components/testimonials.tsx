@@ -3,13 +3,13 @@
 import { useState } from "react";
 
 const showcaseItems = [
-  // Showreel Section - TESTING WITH REAL VIDEO
+  // Showreel Section
   { 
     id: 1, 
     category: "showreel", 
     title: "Main Showreel 2024", 
     type: "horizontal", 
-    videoSrc: "/videos/intro-video.mp4" // Testing this one
+    videoSrc: "/videos/Intro-video.mp4" // EXACT MATCH: Capital 'I'
   },
   { id: 10, category: "showreel", title: "Motion Graphics Reel", type: "horizontal" },
   { id: 11, category: "showreel", title: "Cinematic Reel", type: "horizontal" },
@@ -56,13 +56,13 @@ export default function Testimonials() {
 
         {/* Filter Buttons */}
         <div className="flex justify-center pb-12">
-          <div className="inline-flex flex-wrap justify-center rounded-2xl bg-slate-800/40 p-1 backdrop-blur-sm border border-white/10">
+          <div className="inline-flex flex-wrap justify-center rounded-2xl bg-slate-800/40 p-1 border border-white/10">
             {["showreel", "long-form", "short-form"].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
                 className={`px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium transition-all ${
-                  activeTab === tab ? "bg-slate-900 text-indigo-400 shadow-lg" : "text-slate-500 hover:text-slate-300"
+                  activeTab === tab ? "bg-slate-900 text-indigo-400" : "text-slate-500 hover:text-slate-300"
                 }`}
               >
                 <span className="capitalize">{tab.replace("-", " ")}</span>
@@ -79,9 +79,8 @@ export default function Testimonials() {
               <div
                 key={item.id}
                 className={`group relative overflow-hidden rounded-2xl bg-slate-900 border border-white/10 hover:border-indigo-500/50 transition-all duration-500 w-full
-                ${item.type === "vertical" ? "aspect-[9/16] max-w-[320px] sm:max-w-full" : "aspect-video"}`}
+                ${item.type === "vertical" ? "aspect-[9/16] max-w-[320px]" : "aspect-video"}`}
               >
-                {/* VIDEO LOGIC: Shows video if path exists, otherwise shows icon */}
                 {item.videoSrc ? (
                   <video
                     autoPlay
@@ -100,9 +99,8 @@ export default function Testimonials() {
                   </div>
                 )}
 
-                {/* Label Overlay */}
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950/95 to-transparent p-4">
-                  <p className="text-[10px] sm:text-xs font-bold text-slate-200 uppercase tracking-wider opacity-90 group-hover:opacity-100 transition-opacity">
+                  <p className="text-[10px] sm:text-xs font-bold text-slate-200 uppercase tracking-wider">
                     {item.title}
                   </p>
                 </div>
@@ -113,8 +111,7 @@ export default function Testimonials() {
         {/* Testimonials */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
-            <div key={i} className="relative group p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-300 shadow-xl">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-0 group-hover:opacity-20 transition duration-500"></div>
+            <div key={i} className="relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all shadow-xl">
               <p className="text-slate-300 italic mb-4 text-sm sm:text-base">"{t.content}"</p>
               <div className="flex items-center gap-3">
                 <div className="h-8 w-8 rounded-full bg-gradient-to-tr from-indigo-500 to-slate-700 flex items-center justify-center text-[10px] font-bold text-white">
