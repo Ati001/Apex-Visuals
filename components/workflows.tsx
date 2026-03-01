@@ -8,18 +8,14 @@ import Spotlight from "@/components/spotlight";
 export default function Workflows() {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.4,
+    threshold: 0.2, // Trigger slightly earlier for smoother entry
   });
 
-  // 🎵 Audio References
   const countingAudioRef = useRef<HTMLAudioElement | null>(null);
   const clickAudioRef = useRef<HTMLAudioElement | null>(null);
-
-  // 🔓 Unlock state
   const [audioEnabled, setAudioEnabled] = useState(false);
 
   useEffect(() => {
-    // UPDATED: Now looking for .m4a files
     const counting = new Audio("/sounds/counting.m4a");
     counting.preload = "auto";
     counting.volume = 0.15;
@@ -32,10 +28,8 @@ export default function Workflows() {
 
     const enableAudio = () => {
       setAudioEnabled(true);
-      // "Prime" both m4a files to bypass browser security
       counting.play().then(() => { counting.pause(); }).catch(() => {});
       click.play().then(() => { click.pause(); }).catch(() => {});
-      
       window.removeEventListener("click", enableAudio);
     };
 
@@ -43,12 +37,8 @@ export default function Workflows() {
     return () => window.removeEventListener("click", enableAudio);
   }, []);
 
-  // 🎯 Fast Counting SFX
   const playCountingSfx = () => {
     if (!audioEnabled || !countingAudioRef.current) return;
-    
-    // M4A files can sometimes lag if cloned too fast, 
-    // so we use a simple restart-and-play approach
     const sound = countingAudioRef.current;
     sound.currentTime = 0; 
     sound.play().catch(() => {});
@@ -71,7 +61,8 @@ export default function Workflows() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="pb-12 md:pb-20">
           
-          <div className="mx-auto max-w-3xl pb-12 text-center md:pb-20">
+          {/* Header with Fade In */}
+          <div className={`mx-auto max-w-3xl pb-12 text-center md:pb-20 transition-all duration-1000 delay-100 ${inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
             <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-linear-to-r before:from-transparent before:to-indigo-200/50 after:h-px after:w-8 after:bg-linear-to-l after:from-transparent after:to-indigo-200/50">
               <span className="inline-flex bg-linear-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent uppercase tracking-widest text-xs font-bold">
                 Social Proof
@@ -92,14 +83,14 @@ export default function Workflows() {
                 <div 
                   key={index} 
                   onClick={playCardClickSfx} 
-                  className="group/card cursor-pointer relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px"
+                  /* ANIMATION LOGIC: Staggered entry (delay-300, 500, 700) + Hover Scale */
+                  className={`group/card cursor-pointer relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-700 ease-out 
+                    ${inView ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-12 scale-95"}
+                    hover:scale-[1.03] active:scale-95`}
+                  style={{ transitionDelay: `${index * 200 + 300}ms` }}
                 >
                   <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-indigo-500/15 blur-3xl transition-opacity duration-500 group-hover/card:opacity-0" />
-                  <div 
-                    className="pointer-events-none absolute -left-40 -top-40 z-30 h-80 w-80 rounded-full bg-indigo-500 opacity-0 blur-3xl transition-opacity duration-500 group-hover/card:opacity-20" 
-                    style={{ transform: `translate(var(--mouse-x), var(--mouse-y))` }} 
-                  />
-
+                  
                   <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 border border-gray-800/50">
                     <div className="flex h-48 items-center justify-center bg-gray-900/50 border-b border-gray-800/50">
                       <div className="font-nacelle text-4xl font-bold tracking-tighter text-gray-100 md:text-5xl">
@@ -108,10 +99,9 @@ export default function Workflows() {
                             start={0}
                             end={stat.value}
                             duration={3}
+                            delay={index * 0.2 + 0.5} // Wait for card animation to finish before counting
                             separator=","
                             onUpdate={(val: any) => {
-                              // SFX triggered every 15 units. 
-                              // If silent, try changing 15 to 1 to hear it on every number.
                               if (Math.floor(val.value) % 15 === 0) {
                                 playCountingSfx();
                               }
