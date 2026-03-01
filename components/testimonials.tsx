@@ -3,26 +3,15 @@
 import { useState } from "react";
 
 const showcaseItems = [
-  // Showreel Section
-  { 
-    id: 1, 
-    category: "showreel", 
-    title: "Main Showreel 2024", 
-    type: "horizontal", 
-    videoSrc: "/videos/Intro-video.mp4" 
-  },
+  { id: 1, category: "showreel", title: "Main Showreel 2024", type: "horizontal", videoSrc: "/videos/Intro-video.mp4" },
   { id: 10, category: "showreel", title: "Motion Graphics Reel", type: "horizontal" },
   { id: 11, category: "showreel", title: "Cinematic Reel", type: "horizontal" },
-  
-  // Long-form Section
   { id: 2, category: "long-form", title: "Documentary Edit", type: "horizontal" },
   { id: 3, category: "long-form", title: "Corporate Story", type: "horizontal" },
   { id: 4, category: "long-form", title: "YouTube Feature", type: "horizontal" },
   { id: 5, category: "long-form", title: "Commercial Spot", type: "horizontal" },
   { id: 6, category: "long-form", title: "Event Recap", type: "horizontal" },
   { id: 12, category: "long-form", title: "Brand Documentary", type: "horizontal" },
-  
-  // Short-form Section
   { id: 7, category: "short-form", title: "Product Reel", type: "vertical" },
   { id: 8, category: "short-form", title: "Fitness TikTok", type: "vertical" },
   { id: 9, category: "short-form", title: "Fashion Short", type: "vertical" },
@@ -82,14 +71,7 @@ export default function Testimonials() {
                 ${item.type === "vertical" ? "aspect-[9/16] max-w-[320px] sm:max-w-full" : "aspect-video"}`}
               >
                 {item.videoSrc ? (
-                  <video
-                    controls
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="h-full w-full object-cover"
-                  >
+                  <video controls autoPlay loop muted playsInline className="h-full w-full object-cover">
                     <source src={item.videoSrc} type="video/mp4" />
                   </video>
                 ) : (
@@ -99,7 +81,6 @@ export default function Testimonials() {
                     </div>
                   </div>
                 )}
-
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950/95 to-transparent p-4 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
                   <p className="text-[10px] sm:text-xs font-bold text-slate-200 uppercase tracking-wider">
                     {item.title}
@@ -110,7 +91,7 @@ export default function Testimonials() {
         </div>
 
         {/* Testimonials */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
             <div key={i} className="relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 shadow-xl">
               <p className="text-slate-300 italic mb-4 text-sm sm:text-base">"{t.content}"</p>
@@ -127,11 +108,11 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* WhatsApp Call to Action - Integrated Here */}
-        <div className="mt-12 text-center" data-aos="fade-up">
-          <div className="inline-flex items-center gap-3">
+        {/* Final WhatsApp Section */}
+        <div className="mt-20 text-center">
+          <div className="inline-flex items-center">
             <a
-              className="btn group bg-gradient-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[position:0px_0px] bg-no-repeat text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-[length:100%_150%]"
+              className="btn group bg-gradient-to-t from-indigo-600 to-indigo-500 text-white shadow-lg shadow-indigo-500/20 transition-all"
               href="https://wa.me/923331043321"
               target="_blank"
               rel="noopener noreferrer"
