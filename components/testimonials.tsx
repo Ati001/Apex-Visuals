@@ -3,12 +3,18 @@
 import { useState } from "react";
 
 const showcaseItems = [
-  // Showreel Section - 3 items
-  { id: 1, category: "showreel", title: "Main Showreel 2024", type: "horizontal" },
+  // Showreel Section - TESTING WITH REAL VIDEO
+  { 
+    id: 1, 
+    category: "showreel", 
+    title: "Main Showreel 2024", 
+    type: "horizontal", 
+    videoSrc: "/videos/intro-video.mp4" // Testing this one
+  },
   { id: 10, category: "showreel", title: "Motion Graphics Reel", type: "horizontal" },
   { id: 11, category: "showreel", title: "Cinematic Reel", type: "horizontal" },
   
-  // Long-form Section - 6 items
+  // Long-form Section
   { id: 2, category: "long-form", title: "Documentary Edit", type: "horizontal" },
   { id: 3, category: "long-form", title: "Corporate Story", type: "horizontal" },
   { id: 4, category: "long-form", title: "YouTube Feature", type: "horizontal" },
@@ -16,7 +22,7 @@ const showcaseItems = [
   { id: 6, category: "long-form", title: "Event Recap", type: "horizontal" },
   { id: 12, category: "long-form", title: "Brand Documentary", type: "horizontal" },
   
-  // Short-form Section - 6 items
+  // Short-form Section
   { id: 7, category: "short-form", title: "Product Reel", type: "vertical" },
   { id: 8, category: "short-form", title: "Fitness TikTok", type: "vertical" },
   { id: 9, category: "short-form", title: "Fashion Short", type: "vertical" },
@@ -65,7 +71,7 @@ export default function Testimonials() {
           </div>
         </div>
 
-        {/* Video Grid - Optimized for Mobile, Tablet, and Desktop */}
+        {/* Video Grid */}
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-center mb-20">
           {showcaseItems
             .filter((item) => item.category === activeTab)
@@ -75,12 +81,24 @@ export default function Testimonials() {
                 className={`group relative overflow-hidden rounded-2xl bg-slate-900 border border-white/10 hover:border-indigo-500/50 transition-all duration-500 w-full
                 ${item.type === "vertical" ? "aspect-[9/16] max-w-[320px] sm:max-w-full" : "aspect-video"}`}
               >
-                {/* Video UI Overlay */}
-                <div className="absolute inset-0 bg-slate-800/20 flex items-center justify-center">
-                  <div className="w-12 h-12 rounded-full bg-indigo-600/10 flex items-center justify-center border border-indigo-500/20 group-hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-indigo-400 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                {/* VIDEO LOGIC: Shows video if path exists, otherwise shows icon */}
+                {item.videoSrc ? (
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="h-full w-full object-cover"
+                  >
+                    <source src={item.videoSrc} type="video/mp4" />
+                  </video>
+                ) : (
+                  <div className="absolute inset-0 bg-slate-800/20 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-indigo-600/10 flex items-center justify-center border border-indigo-500/20 group-hover:scale-110 transition-transform">
+                      <svg className="w-6 h-6 text-indigo-400 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* Label Overlay */}
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950/95 to-transparent p-4">
@@ -92,7 +110,7 @@ export default function Testimonials() {
             ))}
         </div>
 
-        {/* Client Testimonials Grid */}
+        {/* Testimonials */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
             <div key={i} className="relative group p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-300 shadow-xl">
