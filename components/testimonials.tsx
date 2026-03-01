@@ -3,15 +3,26 @@
 import { useState } from "react";
 
 const showcaseItems = [
+  // Showreel Section - 3 items
   { id: 1, category: "showreel", title: "Main Showreel 2024", type: "horizontal" },
+  { id: 10, category: "showreel", title: "Motion Graphics Reel", type: "horizontal" },
+  { id: 11, category: "showreel", title: "Cinematic Reel", type: "horizontal" },
+  
+  // Long-form Section - 6 items
   { id: 2, category: "long-form", title: "Documentary Edit", type: "horizontal" },
   { id: 3, category: "long-form", title: "Corporate Story", type: "horizontal" },
   { id: 4, category: "long-form", title: "YouTube Feature", type: "horizontal" },
   { id: 5, category: "long-form", title: "Commercial Spot", type: "horizontal" },
   { id: 6, category: "long-form", title: "Event Recap", type: "horizontal" },
+  { id: 12, category: "long-form", title: "Brand Documentary", type: "horizontal" },
+  
+  // Short-form Section - 6 items (2 rows)
   { id: 7, category: "short-form", title: "Product Reel", type: "vertical" },
   { id: 8, category: "short-form", title: "Fitness TikTok", type: "vertical" },
   { id: 9, category: "short-form", title: "Fashion Short", type: "vertical" },
+  { id: 13, category: "short-form", title: "Gaming Highlight", type: "vertical" },
+  { id: 14, category: "short-form", title: "Travel Reel", type: "vertical" },
+  { id: 15, category: "short-form", title: "Food Promo", type: "vertical" },
 ];
 
 const testimonials = [
@@ -62,19 +73,26 @@ export default function Testimonials() {
               <div
                 key={item.id}
                 className={`group relative overflow-hidden rounded-2xl bg-slate-900 border border-white/10 hover:border-indigo-500/50 transition-all duration-500
-                ${item.type === "vertical" ? "aspect-[9/16] w-full max-w-[280px]" : "aspect-video w-full"}
-                ${activeTab === "showreel" ? "lg:col-start-2" : ""}`}
+                ${item.type === "vertical" ? "aspect-[9/16] w-full max-w-[280px]" : "aspect-video w-full"}`}
               >
+                {/* Video Placeholder/Background */}
                 <div className="absolute inset-0 bg-slate-800/20 flex items-center justify-center">
                   <div className="w-12 h-12 rounded-full bg-indigo-600/10 flex items-center justify-center border border-indigo-500/20 group-hover:scale-110 transition-transform">
                     <svg className="w-6 h-6 text-indigo-400 fill-current" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                   </div>
                 </div>
+
+                {/* LABEL OVERLAY - Bottom Inside */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950/90 to-transparent p-4">
+                  <p className="text-xs font-bold text-slate-200 uppercase tracking-wider opacity-80 group-hover:opacity-100 transition-opacity">
+                    {item.title}
+                  </p>
+                </div>
               </div>
             ))}
         </div>
 
-        {/* Client Testimonials - GLASSMORPHISM CARDS */}
+        {/* Client Testimonials */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
             <div key={i} className="relative group p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-300 shadow-xl">

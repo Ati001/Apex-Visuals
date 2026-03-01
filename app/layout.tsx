@@ -1,6 +1,8 @@
 import "./css/style.css";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
+import Header from "@/components/ui/header";
+import Footer from "@/components/ui/footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,7 +30,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${nacelle.variable} bg-gray-950 font-inter text-base text-gray-200 antialiased`}>
-        {children}
+        <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
+          <Header />
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer />
+        </div>
+        
         {/* Global Security Script */}
         <script dangerouslySetInnerHTML={{ __html: `
           document.addEventListener('contextmenu', e => e.preventDefault());
