@@ -30,7 +30,7 @@ export default function Testimonials() {
   const [activeTab, setActiveTab] = useState("showreel");
 
   return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 pb-20">
       <div className="border-t border-slate-800 py-12 md:py-20">
         
         {/* Header */}
@@ -65,11 +65,7 @@ export default function Testimonials() {
           {showcaseItems
             .filter((item) => item.category === activeTab)
             .map((item) => (
-              <div
-                key={item.id}
-                className={`group relative overflow-hidden rounded-2xl bg-slate-900 border border-white/10 hover:border-indigo-500/50 transition-all duration-500 w-full
-                ${item.type === "vertical" ? "aspect-[9/16] max-w-[320px] sm:max-w-full" : "aspect-video"}`}
-              >
+              <div key={item.id} className={`group relative overflow-hidden rounded-2xl bg-slate-900 border border-white/10 hover:border-indigo-500/50 transition-all duration-500 w-full ${item.type === "vertical" ? "aspect-[9/16] max-w-[320px] sm:max-w-full" : "aspect-video"}`}>
                 {item.videoSrc ? (
                   <video controls autoPlay loop muted playsInline className="h-full w-full object-cover">
                     <source src={item.videoSrc} type="video/mp4" />
@@ -108,23 +104,21 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Final WhatsApp Section */}
+        {/* Final WhatsApp Call to Action */}
         <div className="mt-20 text-center">
-          <div className="inline-flex items-center">
-            <a
-              className="btn group bg-gradient-to-t from-indigo-600 to-indigo-500 text-white shadow-lg shadow-indigo-500/20 transition-all"
-              href="https://wa.me/923331043321"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="relative inline-flex items-center">
-                Book a Call
-                <span className="ml-1 tracking-normal text-indigo-200 transition-transform group-hover:translate-x-0.5">
-                  -&gt;
-                </span>
+          <a
+            className="btn group bg-gradient-to-t from-indigo-600 to-indigo-500 text-white shadow-lg shadow-indigo-500/20 transition-all"
+            href="https://wa.me/923331043321"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className="relative inline-flex items-center">
+              Book a Call
+              <span className="ml-1 tracking-normal text-indigo-200 transition-transform group-hover:translate-x-0.5">
+                -&gt;
               </span>
-            </a>
-          </div>
+            </span>
+          </a>
         </div>
 
       </div>
