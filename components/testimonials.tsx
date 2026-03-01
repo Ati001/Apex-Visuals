@@ -81,7 +81,6 @@ export default function Testimonials() {
                 className={`group relative overflow-hidden rounded-2xl bg-slate-900 border border-white/10 hover:border-indigo-500/50 transition-all duration-500 w-full
                 ${item.type === "vertical" ? "aspect-[9/16] max-w-[320px] sm:max-w-full" : "aspect-video"}`}
               >
-                {/* VIDEO DISPLAY WITH PLAYER CONTROLS */}
                 {item.videoSrc ? (
                   <video
                     controls
@@ -92,7 +91,6 @@ export default function Testimonials() {
                     className="h-full w-full object-cover"
                   >
                     <source src={item.videoSrc} type="video/mp4" />
-                    Your browser does not support the video tag.
                   </video>
                 ) : (
                   <div className="absolute inset-0 bg-slate-800/20 flex items-center justify-center">
@@ -102,7 +100,6 @@ export default function Testimonials() {
                   </div>
                 )}
 
-                {/* Label Overlay - pointer-events-none ensures it doesn't block video controls */}
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950/95 to-transparent p-4 pointer-events-none group-hover:opacity-0 transition-opacity duration-300">
                   <p className="text-[10px] sm:text-xs font-bold text-slate-200 uppercase tracking-wider">
                     {item.title}
@@ -113,7 +110,7 @@ export default function Testimonials() {
         </div>
 
         {/* Testimonials */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {testimonials.map((t, i) => (
             <div key={i} className="relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 shadow-xl">
               <p className="text-slate-300 italic mb-4 text-sm sm:text-base">"{t.content}"</p>
@@ -129,6 +126,26 @@ export default function Testimonials() {
             </div>
           ))}
         </div>
+
+        {/* WhatsApp Call to Action - Integrated Here */}
+        <div className="mt-12 text-center" data-aos="fade-up">
+          <div className="inline-flex items-center gap-3">
+            <a
+              className="btn group bg-gradient-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[position:0px_0px] bg-no-repeat text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-[length:100%_150%]"
+              href="https://wa.me/923331043321"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="relative inline-flex items-center">
+                Book a Call
+                <span className="ml-1 tracking-normal text-indigo-200 transition-transform group-hover:translate-x-0.5">
+                  -&gt;
+                </span>
+              </span>
+            </a>
+          </div>
+        </div>
+
       </div>
     </div>
   );
